@@ -697,8 +697,14 @@ const mapManager = {
     const mapEl = document.getElementById('leaflet-map');
     if (!mapEl || typeof L === 'undefined') return;
     const map = L.map('leaflet-map', {
-      center: [42.6977, 23.3219], zoom: 12,
-      zoomControl: false, attributionControl: false, scrollWheelZoom: false
+      center: [42.6977, 23.3219],
+      zoom: 12,
+      zoomControl: false,
+      attributionControl: false,
+      scrollWheelZoom: true,   // ← zoom с колелото на мишката
+      dragging: true,           // ← плъзгане с мишка
+      touchZoom: true,          // ← pinch-to-zoom на телефон
+      tap: false                // ← предотвратява конфликт с page scroll на мобилен
     });
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
     L.control.zoom({ position: 'bottomright' }).addTo(map);
