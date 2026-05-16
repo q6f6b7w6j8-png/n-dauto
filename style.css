@@ -52,7 +52,7 @@ video[data-bg] {
   opacity: 0.22 !important;
   z-index: -1 !important;
   pointer-events: none !important;
-  transform: translate(-50%, -50%) scale(1.15) !important;
+  /* transform-ът НЕ е тук — контролира се от JS за parallax */
   transform-origin: center center !important;
   will-change: transform !important;
 }
