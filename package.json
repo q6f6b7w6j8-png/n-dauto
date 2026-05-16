@@ -1,0 +1,10 @@
+{
+  "name": "cyan-site",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "live-server --entry-file=index.html"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
