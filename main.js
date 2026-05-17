@@ -67,8 +67,8 @@ const chatBot = {
     {
       keywords: ['здравей','здрасти','хей','hey','hello','hi','добърден','добро утро'],
       responses: [
-        'Здравейте! Добре дошли в n%d auto. Как мога да ви помогна днес?',
-        'Здравейте! Аз съм консиержът на n%d auto. Кажете ми — за кой автомобил мечтаете?',
+        'Здравейте! Добре дошли в N&D auto. Как мога да ви помогна днес?',
+        'Здравейте! Аз съм консиержът на N&D auto. Кажете ми — за кой автомобил мечтаете?',
         'Добре дошли! Готов съм да ви помогна с всякакви въпроси за вноса на вашия автомобил.'
       ]
     },
@@ -697,7 +697,7 @@ const mapManager = {
     const mapEl = document.getElementById('leaflet-map');
     if (!mapEl || typeof L === 'undefined') return;
     const map = L.map('leaflet-map', {
-      center: [42.6977, 23.3219],
+      center: [42.666068, 23.259440],
       zoom: 12,
       zoomControl: false,
       attributionControl: false,
@@ -721,9 +721,9 @@ const mapManager = {
         <div style="position:absolute;top:-2.2rem;left:50%;transform:translateX(-50%);
                     background:rgba(6,8,10,0.92);color:#00e5ff;padding:0.35rem 0.75rem;
                     border-radius:999px;font-size:0.65rem;white-space:nowrap;
-                    border:1px solid rgba(0,229,255,0.18);">n%d auto</div>`
+                    border:1px solid rgba(0,229,255,0.18);">N&D auto</div>`
     });
-    L.marker([42.6977, 23.3219], { icon }).addTo(map);
+    L.marker([42.666068, 23.259440], { icon }).addTo(map);
   }
 };
 
