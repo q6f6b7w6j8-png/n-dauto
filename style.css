@@ -144,13 +144,10 @@ nav {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.4rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
+  color: var(--white);
 }
-.logo-title .pct {
-  color: var(--cyan);
-  font-style: italic;
-  margin: 0 0.05em;
-}
+/* .pct стилове премахнати — брандът е вече N&D */
 .logo-tag {
   font-size: 0.65rem;
   text-transform: uppercase;
@@ -677,6 +674,11 @@ nav {
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
   background: var(--surface);
   z-index: 1;
+  pointer-events: auto;   /* картата е интерактивна */
+  cursor: grab;
+}
+.map-panel:active {
+  cursor: grabbing;
 }
 .contact-panel {
   display: flex;
@@ -771,10 +773,7 @@ footer {
   color: var(--white);
   margin-bottom: 1rem;
 }
-.footer-brand .pct {
-  color: var(--cyan);
-  font-style: italic;
-}
+/* footer-brand .pct премахнат — вече е N&D */
 .footer-copy {
   color: var(--muted);
   font-size: 0.9rem;
