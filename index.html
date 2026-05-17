@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#060809">
-  <title>n%d auto — Cyan & Glassmorphism Edition</title>
+  <title>N&D auto — Cyan & Glassmorphism Edition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
   <div class="aurora" aria-hidden="true">
@@ -20,8 +20,8 @@
 
   <nav class="safe-area">
     <a class="logo" href="#hero">
-      <div class="logo-img"><img src="544130018_17844222579570520_2489720357353955422_n.jpg" alt="n%d auto logo"></div>
-      <div class="logo-text"><span class="logo-title">n<span class="pct">%</span>d</span><span class="logo-tag">auto</span></div>
+      <div class="logo-img"><img src="544130018_17844222579570520_2489720357353955422_n.jpg" alt="N&D auto logo"></div>
+      <div class="logo-text"><span class="logo-title">N&amp;D</span><span class="logo-tag">auto</span></div>
     </a>
     <div class="nav-links">
       <a class="magnetic-link" href="#hero">Home</a>
@@ -113,12 +113,13 @@
         <div id="leaflet-map" class="map-panel"></div>
         <div class="contact-panel">
           <p>Book a consultation, request a tailored quote, or ask about a specific Porsche, BMW, Mercedes-AMG, Genesis, Hyundai or Kia import.</p>
-          <form id="contactForm">
+          <form id="contactForm" action="https://formspree.io/f/ТВОЯТ_ID" method="POST">
+            <input type="hidden" name="_subject" value="Ново запитване — N&D auto">
             <div class="form-grid">
-              <label class="field-row"><span>Full Name</span><input type="text" required class="input" placeholder="Alex Petrov"></label>
-              <label class="field-row"><span>Email</span><input type="email" required class="input" placeholder="alex@example.com"></label>
-              <label class="field-row"><span>Phone</span><input type="tel" class="input" placeholder="+359 882 356 746"></label>
-              <label class="field-row"><span>Vehicle Interest</span><textarea required class="input" placeholder="Porsche 911 Carrera 4S, 2022, Europe, premium spec"></textarea></label>
+              <label class="field-row"><span>Full Name</span><input type="text" name="name" required class="input" placeholder="Alex Petrov"></label>
+              <label class="field-row"><span>Email</span><input type="email" name="email" required class="input" placeholder="alex@example.com"></label>
+              <label class="field-row"><span>Phone</span><input type="tel" name="phone" class="input" placeholder="+359 882 356 746"></label>
+              <label class="field-row"><span>Vehicle Interest</span><textarea name="vehicle" required class="input" placeholder="Porsche 911 Carrera 4S, 2022, Europe, premium spec"></textarea></label>
             </div>
             <div class="contact-actions">
               <button class="btn-frost btn-primary magnetic-link" type="submit"><span>Send Inquiry</span></button>
@@ -133,7 +134,7 @@
   <footer>
     <div class="footer-grid">
       <div>
-        <div class="footer-brand">n<span class="pct">%</span>d auto</div>
+        <div class="footer-brand">N&amp;D auto</div>
         <p class="footer-copy">Premium vehicle imports with advanced transparency, glass-style UI, and desktop/mobile storytelling built for elite clients.</p>
       </div>
       <div class="footer-links">
@@ -145,10 +146,11 @@
       <div class="footer-links">
         <a class="footer-link magnetic-link" href="https://www.instagram.com/n.and.d.auto/" target="_blank" rel="noopener">Instagram</a>
         <a class="footer-link magnetic-link" href="tel:+359882356746">+359 882 356 746</a>
+        <a class="footer-link magnetic-link" href="mailto:ndautoimportbulgaria@gmail.com">ndautoimportbulgaria@gmail.com</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 n%d auto. All rights reserved.</span>
+      <span>© 2026 N&D auto. All rights reserved.</span>
       <span>Designed for premium mobile + desktop experiences.</span>
     </div>
   </footer>
@@ -157,20 +159,20 @@
     <div class="chat-panel" id="chatPanel">
       <div class="chat-head">
         <div class="agent-avatar"><span>n</span></div>
-        <div class="agent-meta"><div class="agent-name">n%d Concierge</div><div class="agent-status"><span></span>Online</div></div>
+        <div class="agent-meta"><div class="agent-name">N&D Concierge</div><div class="agent-status"><span></span>Online</div></div>
       </div>
-      <div class="chat-msgs" id="chatMsgs"><div class="chat-msg bot"><strong>n%d auto</strong> Welcome. Ask about timelines, costs, sourcing, or premium Porsche import support.</div></div>
+      <div class="chat-msgs" id="chatMsgs"><div class="chat-msg bot"><strong>N&D auto</strong> Welcome. Ask about timelines, costs, sourcing, or premium Porsche import support.</div></div>
       <div class="chat-typing" id="chatTyping"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>Thinking...</div>
       <div class="chat-footer"><input id="chatInput" class="chat-input" placeholder="Ask the concierge..."><div class="chat-send magnetic-link" id="chatSend">➤</div></div>
     </div>
     <div class="chat-fab magnetic-link" id="chatFab">💬</div>
   </div>
-  <a class="mobile-call-fab magnetic-link" href="tel:+359882356746" aria-label="Call n%d auto">📞 Call Now</a>
+  <a class="mobile-call-fab magnetic-link" href="tel:+359882356746" aria-label="Call N&D auto">📞 Call Now</a>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="main.js"></script>
+  <script src="./scripts/main.js"></script>
 </body>
 </html>
