@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg" data-lang="bg">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -10,6 +10,86 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ─── Language Switcher ──────────────────────────────────────────── */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      padding: 4px 6px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
+      transition: box-shadow 0.3s;
+    }
+    .lang-switcher:hover {
+      box-shadow: 0 4px 24px rgba(0,210,210,0.12), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 11px 5px 7px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      transition: all 0.25s cubic-bezier(.25,.8,.25,1);
+      position: relative;
+    }
+    .lang-btn.active {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .lang-btn:hover:not(.active) {
+      color: rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.05);
+    }
+    .lang-btn svg {
+      width: 22px;
+      height: 16px;
+      border-radius: 3px;
+      display: block;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .lang-btn:hover svg {
+      transform: scale(1.08);
+    }
+    .lang-btn.active svg {
+      box-shadow: 0 0 0 1.5px rgba(0,210,200,0.5), 0 1px 6px rgba(0,0,0,0.4);
+    }
+
+    /* divider between lang buttons */
+    .lang-divider {
+      width: 1px;
+      height: 14px;
+      background: rgba(255,255,255,0.14);
+      flex-shrink: 0;
+    }
+
+    /* nav adjustments to fit lang switcher */
+    nav .nav-links {
+      gap: 28px;
+    }
+    @media (max-width: 768px) {
+      .lang-switcher { display: flex; }
+      .lang-btn span { display: none; }
+      .lang-btn { padding: 5px 6px; }
+    }
+  </style>
 </head>
 <body>
   <div class="aurora" aria-hidden="true">
@@ -20,47 +100,83 @@
 
   <nav class="safe-area">
     <a class="logo" href="#hero">
-      <div class="logo-img"><img src="544130018_17844222579570520_2489720357353955422_n.jpg" alt="N&D auto logo"></div>
-     <span class="logo-title">N<span class="amp">&amp;</span>D</span>
+      <div class="logo-img"><img src="544130018_17844222579570520_2489720357353955422_n.jpg" alt="N&D auto лого"></div>
+      <span class="logo-title">N<span class="amp">&amp;</span>D</span>
     </a>
     <div class="nav-links">
-      <a class="magnetic-link" href="#hero">Home</a>
-      <a class="magnetic-link" href="#reel">Reel</a>
-      <a class="magnetic-link" href="#story">Story</a>
-      <a class="magnetic-link" href="#contact">Contact</a>
+      <a class="magnetic-link" href="#hero"   data-i18n="nav.home">Начало</a>
+      <a class="magnetic-link" href="#reel"   data-i18n="nav.reel">Рийл</a>
+      <a class="magnetic-link" href="#story"  data-i18n="nav.story">История</a>
+      <a class="magnetic-link" href="#contact" data-i18n="nav.contact">Контакти</a>
     </div>
-    <a class="cta-nav magnetic-link" href="#contact">Request Quote</a>
+
+    <!-- ── Language Switcher ── -->
+    <div class="lang-switcher" role="group" aria-label="Избор на език">
+      <button class="lang-btn active" id="btn-bg" onclick="setLang('bg')" aria-label="Български">
+        <!-- Bulgarian Flag SVG -->
+        <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+          <rect width="22" height="16" fill="#ffffff"/>
+          <rect y="5.33" width="22" height="5.34" fill="#00966E"/>
+          <rect y="10.67" width="22" height="5.33" fill="#D62612"/>
+        </svg>
+        <span>БГ</span>
+      </button>
+      <div class="lang-divider"></div>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')" aria-label="English">
+        <!-- UK Flag SVG (Union Jack) -->
+        <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+          <rect width="22" height="16" fill="#012169"/>
+          <!-- white diagonals -->
+          <line x1="0" y1="0" x2="22" y2="16" stroke="#fff" stroke-width="3.5"/>
+          <line x1="22" y1="0" x2="0" y2="16" stroke="#fff" stroke-width="3.5"/>
+          <!-- red diagonals -->
+          <line x1="0" y1="0" x2="22" y2="16" stroke="#C8102E" stroke-width="1.8"/>
+          <line x1="22" y1="0" x2="0" y2="16" stroke="#C8102E" stroke-width="1.8"/>
+          <!-- white cross -->
+          <rect x="9" y="0" width="4" height="16" fill="#fff"/>
+          <rect x="0" y="6" width="22" height="4" fill="#fff"/>
+          <!-- red cross -->
+          <rect x="9.8" y="0" width="2.4" height="16" fill="#C8102E"/>
+          <rect x="0" y="6.8" width="22" height="2.4" fill="#C8102E"/>
+        </svg>
+        <span>EN</span>
+      </button>
+    </div>
+
+    <a class="cta-nav magnetic-link" href="#contact" data-i18n="nav.cta">Запитване</a>
   </nav>
 
   <main>
+    <!-- ── HERO ── -->
     <section id="hero" class="section hero-section safe-area">
       <div class="hero-copy">
-        <span class="hero-eyebrow">Automotive import configurator</span>
-        <h1 class="hero-title">Elevating global car import to a premium experience.</h1>
-        <p class="hero-copy-text">We source elite vehicles from South Korea, USA, Canada and Europe. Every import is curated, inspected, and delivered with luxury-level transparency and immersive storytelling.</p>
+        <span class="hero-eyebrow" data-i18n="hero.eyebrow">Конфигуратор за автомобилен внос</span>
+        <h1 class="hero-title" data-i18n="hero.title">Издигаме световния внос на автомобили до премиум изживяване.</h1>
+        <p class="hero-copy-text" data-i18n="hero.copy">Набавяме елитни автомобили от Южна Корея, САЩ, Канада и Европа. Всеки внос е подбран, инспектиран и доставен с прозрачност от луксозно ниво и завладяващ разказ.</p>
         <div class="hero-actions">
-          <a class="btn-frost btn-primary magnetic-link" href="#contact"><span>Request Quote</span></a>
-          <a class="btn-frost btn-secondary magnetic-link" href="#story"><span>Explore the Route</span></a>
+          <a class="btn-frost btn-primary magnetic-link" href="#contact"><span data-i18n="nav.cta">Запитване</span></a>
+          <a class="btn-frost btn-secondary magnetic-link" href="#story"><span data-i18n="hero.explore">Разгледай маршрута</span></a>
         </div>
         <div class="hero-meta">
-          <div class="meta-pill"><strong>200+</strong><span>Imported Cars</span></div>
-          <div class="meta-pill"><strong>4</strong><span>Step Journey</span></div>
-          <div class="meta-pill"><strong>24h</strong><span>Fast Response</span></div>
+          <div class="meta-pill"><strong>200+</strong><span data-i18n="hero.stat1">Внесени коли</span></div>
+          <div class="meta-pill"><strong>4</strong><span data-i18n="hero.stat2">Стъпки на пътя</span></div>
+          <div class="meta-pill"><strong>24ч</strong><span data-i18n="hero.stat3">Бърз отговор</span></div>
         </div>
       </div>
       <div class="hero-media">
         <div class="hero-viewport">
-          <div class="hero-tag">Floating 3D Porsche Teaser</div>
+          <div class="hero-tag" data-i18n="hero.tag">3D Визуализация — Porsche</div>
           <div class="hero-canvas-wrap"><canvas id="three-canvas"></canvas></div>
         </div>
       </div>
     </section>
 
+    <!-- ── REEL ── -->
     <section id="reel" class="section reel-section">
       <div class="section-head">
-        <div class="section-title">Social Showcase</div>
-        <h2 class="section-heading">Reel the premium narrative.</h2>
-        <p class="section-copy">A vertical reel in a smartphone frame, ready for mobile-first viewing on iOS and Android.</p>
+        <div class="section-title" data-i18n="reel.label">Социална витрина</div>
+        <h2 class="section-heading" data-i18n="reel.heading">Завъртете премиум наратива.</h2>
+        <p class="section-copy" data-i18n="reel.copy">Вертикален рийл в смартфон рамка, оптимизиран за гледане на iOS и Android.</p>
       </div>
       <div class="reel-grid">
         <div class="instagram-card">
@@ -74,55 +190,85 @@
           </div>
         </div>
         <div class="reel-copy">
-          <p class="subtitle"><strong>From reel to reality:</strong> polished import storytelling with cinematic presentation built for attention on mobile and desktop.</p>
-          <div class="caption-subs">English captions are layered directly over the reel container, reinforcing clarity and global premium presence. “This is where your Porsche narrative begins.”</div>
+          <p class="subtitle"><strong data-i18n="reel.subtitle.bold">От рийл към реалност:</strong> <span data-i18n="reel.subtitle.text">израфинирано разказване на историята на вноса с кинематична презентация, изградена да привлича вниманието на мобилни и десктоп устройства.</span></p>
+          <div class="caption-subs" data-i18n="reel.caption">Английски субтитри са наслоени директно върху рийл контейнера, подсилвайки яснотата и глобалното премиум присъствие. „Тук започва вашата Porsche история."</div>
         </div>
       </div>
     </section>
 
+    <!-- ── STORY / ROUTE ── -->
     <section id="story" class="section story-section">
       <div class="section-head">
-        <div class="section-title">Ship & Deliver</div>
-        <h2 class="section-heading">A story that moves with your thumb.</h2>
-        <p class="section-copy">Scroll through an interactive shipping narrative with a Cyan progress line that grows as you move down the page.</p>
+        <div class="section-title" data-i18n="story.label">Доставка и предаване</div>
+        <h2 class="section-heading" data-i18n="story.heading">История, която се движи с палеца ти.</h2>
+        <p class="section-copy" data-i18n="story.copy">Превъртете интерактивния разказ за доставка с циановата линия на напредъка, която расте с всяко скролване.</p>
       </div>
       <div class="route-panel">
         <div class="route-visual">
           <div class="route-track"></div>
           <div class="route-progress" id="routeProgress"></div>
-          <div class="route-marker marker-top"><span>Seoul</span></div>
-          <div class="route-marker marker-middle"><span>New York</span></div>
-          <div class="route-marker marker-midlow"><span>Hamburg</span></div>
-          <div class="route-marker marker-bottom"><span>Bulgaria</span></div>
+          <div class="route-marker marker-top"><span data-i18n="route.seoul">Сеул</span></div>
+          <div class="route-marker marker-middle"><span data-i18n="route.ny">Ню Йорк</span></div>
+          <div class="route-marker marker-midlow"><span data-i18n="route.hamburg">Хамбург</span></div>
+          <div class="route-marker marker-bottom"><span data-i18n="route.bg">България</span></div>
         </div>
         <div class="route-detail">
-          <div class="step-card" data-step="0"><div class="step-label">Sourcing</div><h3 class="step-title">Global selection</h3><p class="step-copy">Elite vehicles are sourced from trusted partners in South Korea, USA, and Europe.</p></div>
-          <div class="step-card" data-step="1"><div class="step-label">Inspection</div><h3 class="step-title">Detailed checks</h3><p class="step-copy">Every car undergoes a premium inspection, technical audit, and certification before shipping.</p></div>
-          <div class="step-card" data-step="2"><div class="step-label">Shipping</div><h3 class="step-title">Wave-ready transit</h3><p class="step-copy">RoRo and container logistics are orchestrated with full visibility and Cyan-grade precision.</p></div>
-          <div class="step-card" data-step="3"><div class="step-label">Delivery</div><h3 class="step-title">Finish line arrival</h3><p class="step-copy">The car arrives at your door with route updates, customs support, and premium handover.</p></div>
+          <div class="step-card" data-step="0">
+            <div class="step-label" data-i18n="step0.label">Набавяне</div>
+            <h3 class="step-title" data-i18n="step0.title">Глобален избор</h3>
+            <p class="step-copy" data-i18n="step0.copy">Елитни автомобили се набавят от доверени партньори в Южна Корея, САЩ и Европа.</p>
+          </div>
+          <div class="step-card" data-step="1">
+            <div class="step-label" data-i18n="step1.label">Инспекция</div>
+            <h3 class="step-title" data-i18n="step1.title">Детайлна проверка</h3>
+            <p class="step-copy" data-i18n="step1.copy">Всяка кола преминава премиум инспекция, техническа проверка и сертификация преди изпращане.</p>
+          </div>
+          <div class="step-card" data-step="2">
+            <div class="step-label" data-i18n="step2.label">Транспорт</div>
+            <h3 class="step-title" data-i18n="step2.title">Готов за вълните</h3>
+            <p class="step-copy" data-i18n="step2.copy">RoRo и контейнерна логистика се оркестрират с пълна видимост и прецизност от циан клас.</p>
+          </div>
+          <div class="step-card" data-step="3">
+            <div class="step-label" data-i18n="step3.label">Доставка</div>
+            <h3 class="step-title" data-i18n="step3.title">Пристигане на финала</h3>
+            <p class="step-copy" data-i18n="step3.copy">Колата пристига пред вратата ви с актуализации за маршрута, митническа помощ и премиум предаване.</p>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- ── CONTACT ── -->
     <section id="contact" class="section contact-section">
       <div class="section-head">
-        <div class="section-title">Contact</div>
-        <h2 class="section-heading">Start the premium import journey.</h2>
+        <div class="section-title" data-i18n="contact.label">Контакти</div>
+        <h2 class="section-heading" data-i18n="contact.heading">Започнете премиум пътуването за внос.</h2>
       </div>
       <div class="contact-layout">
         <div id="leaflet-map" class="map-panel"></div>
         <div class="contact-panel">
-          <p>Book a consultation, request a tailored quote, or ask about a specific Porsche, BMW, Mercedes-AMG, Genesis, Hyundai or Kia import.</p>
+          <p data-i18n="contact.intro">Резервирайте консултация, поискайте персонализирана оферта или попитайте за конкретен внос на Porsche, BMW, Mercedes-AMG, Genesis, Hyundai или Kia.</p>
           <form id="contactForm" action="https://formspree.io/f/ТВОЯТ_ID" method="POST">
             <input type="hidden" name="_subject" value="Ново запитване — N&D auto">
             <div class="form-grid">
-              <label class="field-row"><span>Full Name</span><input type="text" name="name" required class="input" placeholder="Alex Petrov"></label>
-              <label class="field-row"><span>Email</span><input type="email" name="email" required class="input" placeholder="alex@example.com"></label>
-              <label class="field-row"><span>Phone</span><input type="tel" name="phone" class="input" placeholder="+359 882 356 746"></label>
-              <label class="field-row"><span>Vehicle Interest</span><textarea name="vehicle" required class="input" placeholder="Porsche 911 Carrera 4S, 2022, Europe, premium spec"></textarea></label>
+              <label class="field-row">
+                <span data-i18n="form.name">Три имена</span>
+                <input type="text" name="name" required class="input" placeholder="Александър Петров">
+              </label>
+              <label class="field-row">
+                <span data-i18n="form.email">Имейл</span>
+                <input type="email" name="email" required class="input" placeholder="alex@example.com">
+              </label>
+              <label class="field-row">
+                <span data-i18n="form.phone">Телефон</span>
+                <input type="tel" name="phone" class="input" placeholder="+359 882 356 746">
+              </label>
+              <label class="field-row">
+                <span data-i18n="form.vehicle">Интерес към автомобил</span>
+                <textarea name="vehicle" required class="input" placeholder="Porsche 911 Carrera 4S, 2022, Европа, премиум спецификация"></textarea>
+              </label>
             </div>
             <div class="contact-actions">
-              <button class="btn-frost btn-primary magnetic-link" type="submit"><span>Send Inquiry</span></button>
+              <button class="btn-frost btn-primary magnetic-link" type="submit"><span data-i18n="form.submit">Изпрати запитване</span></button>
               <a class="phone-float magnetic-link" href="tel:+359882356746"><span class="phone-icon">📞</span> +359 882 356 746</a>
             </div>
           </form>
@@ -134,14 +280,14 @@
   <footer>
     <div class="footer-grid">
       <div>
-       <div class="footer-brand">N<span class="amp">&amp;</span>D auto</div>
-        <p class="footer-copy">Premium vehicle imports with advanced transparency, glass-style UI, and desktop/mobile storytelling built for elite clients.</p>
+        <div class="footer-brand">N<span class="amp">&amp;</span>D auto</div>
+        <p class="footer-copy" data-i18n="footer.copy">Премиум внос на автомобили с напреднала прозрачност, стъклен UI стил и разказване, изградено за десктоп и мобилни устройства за елитни клиенти.</p>
       </div>
       <div class="footer-links">
-        <a class="footer-link magnetic-link" href="#hero">Home</a>
-        <a class="footer-link magnetic-link" href="#reel">Reel</a>
-        <a class="footer-link magnetic-link" href="#story">Story</a>
-        <a class="footer-link magnetic-link" href="#contact">Contact</a>
+        <a class="footer-link magnetic-link" href="#hero"    data-i18n="nav.home">Начало</a>
+        <a class="footer-link magnetic-link" href="#reel"    data-i18n="nav.reel">Рийл</a>
+        <a class="footer-link magnetic-link" href="#story"   data-i18n="nav.story">История</a>
+        <a class="footer-link magnetic-link" href="#contact" data-i18n="nav.contact">Контакти</a>
       </div>
       <div class="footer-links">
         <a class="footer-link magnetic-link" href="https://www.instagram.com/n.and.d.auto/" target="_blank" rel="noopener">Instagram</a>
@@ -150,29 +296,218 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 N&D auto. All rights reserved.</span>
-      <span>Designed for premium mobile + desktop experiences.</span>
+      <span data-i18n="footer.rights">© 2026 N&D auto. Всички права запазени.</span>
+      <span data-i18n="footer.desc">Проектирано за премиум мобилно и десктоп изживяване.</span>
     </div>
   </footer>
 
+  <!-- Chat widget -->
   <div class="chat-w">
     <div class="chat-panel" id="chatPanel">
       <div class="chat-head">
         <div class="agent-avatar"><span>n</span></div>
-        <div class="agent-meta"><div class="agent-name">N&D Concierge</div><div class="agent-status"><span></span>Online</div></div>
+        <div class="agent-meta">
+          <div class="agent-name">N&D Консиерж</div>
+          <div class="agent-status"><span></span><span data-i18n="chat.status">Онлайн</span></div>
+        </div>
       </div>
-      <div class="chat-msgs" id="chatMsgs"><div class="chat-msg bot"><strong>N&D auto</strong> Welcome. Ask about timelines, costs, sourcing, or premium Porsche import support.</div></div>
-      <div class="chat-typing" id="chatTyping"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>Thinking...</div>
-      <div class="chat-footer"><input id="chatInput" class="chat-input" placeholder="Ask the concierge..."><div class="chat-send magnetic-link" id="chatSend">➤</div></div>
+      <div class="chat-msgs" id="chatMsgs">
+        <div class="chat-msg bot"><strong>N&D auto</strong> <span data-i18n="chat.welcome">Добре дошли. Попитайте за срокове, разходи, набавяне или поддръжка при премиум внос на Porsche.</span></div>
+      </div>
+      <div class="chat-typing" id="chatTyping"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span><span data-i18n="chat.thinking">Зарежда...</span></div>
+      <div class="chat-footer">
+        <input id="chatInput" class="chat-input" placeholder="" data-i18n-placeholder="chat.placeholder">
+        <div class="chat-send magnetic-link" id="chatSend">➤</div>
+      </div>
     </div>
     <div class="chat-fab magnetic-link" id="chatFab">💬</div>
   </div>
-  <a class="mobile-call-fab magnetic-link" href="tel:+359882356746" aria-label="Call N&D auto">📞 Call Now</a>
+  <a class="mobile-call-fab magnetic-link" href="tel:+359882356746" aria-label="Обади се на N&D auto">
+    📞 <span data-i18n="call.fab">Обади се</span>
+  </a>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- ── i18n Engine ──────────────────────────────────────────────── -->
+  <script>
+    const TRANSLATIONS = {
+      bg: {
+        "nav.home":    "Начало",
+        "nav.reel":    "Рийл",
+        "nav.story":   "История",
+        "nav.contact": "Контакти",
+        "nav.cta":     "Запитване",
+
+        "hero.eyebrow":  "Конфигуратор за автомобилен внос",
+        "hero.title":    "Издигаме световния внос на автомобили до премиум изживяване.",
+        "hero.copy":     "Набавяме елитни автомобили от Южна Корея, САЩ, Канада и Европа. Всеки внос е подбран, инспектиран и доставен с прозрачност от луксозно ниво и завладяващ разказ.",
+        "hero.explore":  "Разгледай маршрута",
+        "hero.stat1":    "Внесени коли",
+        "hero.stat2":    "Стъпки на пътя",
+        "hero.stat3":    "Бърз отговор",
+        "hero.tag":      "3D Визуализация — Porsche",
+
+        "reel.label":        "Социална витрина",
+        "reel.heading":      "Завъртете премиум наратива.",
+        "reel.copy":         "Вертикален рийл в смартфон рамка, оптимизиран за гледане на iOS и Android.",
+        "reel.subtitle.bold":"От рийл към реалност:",
+        "reel.subtitle.text":"израфинирано разказване на историята на вноса с кинематична презентация, изградена да привлича вниманието на мобилни и десктоп устройства.",
+        "reel.caption":      "Английски субтитри са наслоени директно върху рийл контейнера, подсилвайки яснотата и глобалното премиум присъствие. „Тук започва вашата Porsche история."",
+
+        "story.label":   "Доставка и предаване",
+        "story.heading": "История, която се движи с палеца ти.",
+        "story.copy":    "Превъртете интерактивния разказ за доставка с циановата линия на напредъка, която расте с всяко скролване.",
+
+        "route.seoul":   "Сеул",
+        "route.ny":      "Ню Йорк",
+        "route.hamburg": "Хамбург",
+        "route.bg":      "България",
+
+        "step0.label": "Набавяне",
+        "step0.title": "Глобален избор",
+        "step0.copy":  "Елитни автомобили се набавят от доверени партньори в Южна Корея, САЩ и Европа.",
+        "step1.label": "Инспекция",
+        "step1.title": "Детайлна проверка",
+        "step1.copy":  "Всяка кола преминава премиум инспекция, техническа проверка и сертификация преди изпращане.",
+        "step2.label": "Транспорт",
+        "step2.title": "Готов за вълните",
+        "step2.copy":  "RoRo и контейнерна логистика се оркестрират с пълна видимост и прецизност от циан клас.",
+        "step3.label": "Доставка",
+        "step3.title": "Пристигане на финала",
+        "step3.copy":  "Колата пристига пред вратата ви с актуализации за маршрута, митническа помощ и премиум предаване.",
+
+        "contact.label":   "Контакти",
+        "contact.heading": "Започнете премиум пътуването за внос.",
+        "contact.intro":   "Резервирайте консултация, поискайте персонализирана оферта или попитайте за конкретен внос на Porsche, BMW, Mercedes-AMG, Genesis, Hyundai или Kia.",
+
+        "form.name":    "Три имена",
+        "form.email":   "Имейл",
+        "form.phone":   "Телефон",
+        "form.vehicle": "Интерес към автомобил",
+        "form.submit":  "Изпрати запитване",
+
+        "footer.copy":   "Премиум внос на автомобили с напреднала прозрачност, стъклен UI стил и разказване, изградено за десктоп и мобилни устройства за елитни клиенти.",
+        "footer.rights": "© 2026 N&D auto. Всички права запазени.",
+        "footer.desc":   "Проектирано за премиум мобилно и десктоп изживяване.",
+
+        "chat.status":      "Онлайн",
+        "chat.welcome":     "Добре дошли. Попитайте за срокове, разходи, набавяне или поддръжка при премиум внос на Porsche.",
+        "chat.thinking":    "Зарежда...",
+        "chat.placeholder": "Попитайте консиержа...",
+        "call.fab":         "Обади се",
+      },
+      en: {
+        "nav.home":    "Home",
+        "nav.reel":    "Reel",
+        "nav.story":   "Story",
+        "nav.contact": "Contact",
+        "nav.cta":     "Request Quote",
+
+        "hero.eyebrow":  "Automotive import configurator",
+        "hero.title":    "Elevating global car import to a premium experience.",
+        "hero.copy":     "We source elite vehicles from South Korea, USA, Canada and Europe. Every import is curated, inspected, and delivered with luxury-level transparency and immersive storytelling.",
+        "hero.explore":  "Explore the Route",
+        "hero.stat1":    "Imported Cars",
+        "hero.stat2":    "Step Journey",
+        "hero.stat3":    "Fast Response",
+        "hero.tag":      "Floating 3D Porsche Teaser",
+
+        "reel.label":        "Social Showcase",
+        "reel.heading":      "Reel the premium narrative.",
+        "reel.copy":         "A vertical reel in a smartphone frame, ready for mobile-first viewing on iOS and Android.",
+        "reel.subtitle.bold":"From reel to reality:",
+        "reel.subtitle.text":"polished import storytelling with cinematic presentation built for attention on mobile and desktop.",
+        "reel.caption":      "English captions are layered directly over the reel container, reinforcing clarity and global premium presence. "This is where your Porsche narrative begins."",
+
+        "story.label":   "Ship & Deliver",
+        "story.heading": "A story that moves with your thumb.",
+        "story.copy":    "Scroll through an interactive shipping narrative with a Cyan progress line that grows as you move down the page.",
+
+        "route.seoul":   "Seoul",
+        "route.ny":      "New York",
+        "route.hamburg": "Hamburg",
+        "route.bg":      "Bulgaria",
+
+        "step0.label": "Sourcing",
+        "step0.title": "Global selection",
+        "step0.copy":  "Elite vehicles are sourced from trusted partners in South Korea, USA, and Europe.",
+        "step1.label": "Inspection",
+        "step1.title": "Detailed checks",
+        "step1.copy":  "Every car undergoes a premium inspection, technical audit, and certification before shipping.",
+        "step2.label": "Shipping",
+        "step2.title": "Wave-ready transit",
+        "step2.copy":  "RoRo and container logistics are orchestrated with full visibility and Cyan-grade precision.",
+        "step3.label": "Delivery",
+        "step3.title": "Finish line arrival",
+        "step3.copy":  "The car arrives at your door with route updates, customs support, and premium handover.",
+
+        "contact.label":   "Contact",
+        "contact.heading": "Start the premium import journey.",
+        "contact.intro":   "Book a consultation, request a tailored quote, or ask about a specific Porsche, BMW, Mercedes-AMG, Genesis, Hyundai or Kia import.",
+
+        "form.name":    "Full Name",
+        "form.email":   "Email",
+        "form.phone":   "Phone",
+        "form.vehicle": "Vehicle Interest",
+        "form.submit":  "Send Inquiry",
+
+        "footer.copy":   "Premium vehicle imports with advanced transparency, glass-style UI, and desktop/mobile storytelling built for elite clients.",
+        "footer.rights": "© 2026 N&D auto. All rights reserved.",
+        "footer.desc":   "Designed for premium mobile + desktop experiences.",
+
+        "chat.status":      "Online",
+        "chat.welcome":     "Welcome. Ask about timelines, costs, sourcing, or premium Porsche import support.",
+        "chat.thinking":    "Thinking...",
+        "chat.placeholder": "Ask the concierge...",
+        "call.fab":         "Call Now",
+      }
+    };
+
+    let currentLang = localStorage.getItem('nd-lang') || 'bg';
+
+    function setLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('nd-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+      document.documentElement.setAttribute('data-lang', lang);
+
+      // toggle active button
+      document.getElementById('btn-bg').classList.toggle('active', lang === 'bg');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+      const t = TRANSLATIONS[lang];
+
+      // text nodes
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.textContent = t[key];
+      });
+
+      // placeholder attributes
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
+      });
+
+      // page title
+      document.title = lang === 'bg'
+        ? 'N&D auto — Официален сайт'
+        : 'N&D auto — Official website';
+
+      // chat welcome message (if already rendered)
+      const firstMsg = document.querySelector('.chat-msg.bot');
+      if (firstMsg) {
+        firstMsg.innerHTML = `<strong>N&D auto</strong> ${t['chat.welcome']}`;
+      }
+    }
+
+    // apply on load
+    document.addEventListener('DOMContentLoaded', () => setLang(currentLang));
+  </script>
+
   <script src="main.js"></script>
 </body>
 </html>
