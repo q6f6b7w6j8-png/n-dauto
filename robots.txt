@@ -1,0 +1,33 @@
+# robots.txt for N&D auto — https://nndauto-import.com
+# Premium car import from Germany, USA, Canada and South Korea.
+
+User-agent: *
+Allow: /
+
+# Block sensitive/dev files
+Disallow: /server.js
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /Untitled-1.json
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Allow major search engines explicit access
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Block known AI scrapers that don't drive traffic
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+# Sitemap
+Sitemap: https://nndauto-import.com/sitemap.xml
