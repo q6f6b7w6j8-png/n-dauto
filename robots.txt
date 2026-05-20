@@ -1,4 +1,4 @@
-# robots.txt for N&D auto — https://nndauto-import.com
+# robots.txt for N&D auto — https://www.nndauto-import.com
 # Premium car import from Germany, USA, Canada and South Korea.
 
 User-agent: *
@@ -30,4 +30,4 @@ User-agent: CCBot
 Disallow: /
 
 # Sitemap
-Sitemap: https://nndauto-import.com/sitemap.xml
+Sitemap: https://www.nndauto-import.com/sitemap.xml

@@ -3,38 +3,38 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>https://nndauto-import.com/</loc>
+    <loc>https://www.nndauto-import.com/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="bg" href="https://nndauto-import.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://nndauto-import.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://nndauto-import.com/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://www.nndauto-import.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nndauto-import.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nndauto-import.com/"/>
   </url>
 
   <url>
-    <loc>https://nndauto-import.com/#hero</loc>
+    <loc>https://www.nndauto-import.com/#hero</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://nndauto-import.com/#story</loc>
+    <loc>https://www.nndauto-import.com/#story</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://nndauto-import.com/#reel</loc>
+    <loc>https://www.nndauto-import.com/#reel</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://nndauto-import.com/#contact</loc>
+    <loc>https://www.nndauto-import.com/#contact</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
